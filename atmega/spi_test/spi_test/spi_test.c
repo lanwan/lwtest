@@ -6,10 +6,12 @@
  */ 
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 #define DDR_SPI		DDRB
 #define DD_MOSI		PB5
 #define DD_SCK		PB7	
+#define DD_MISO		PB6
 #define DD_IRQ		INT0_vect
 #define DbgPrint	printf
 #define ROLER_SENDER		1	//sender or receiver
@@ -42,6 +44,10 @@ static void SPI_MasterWrite(const char* pData, uint16_t len)
 ISR(DD_IRQ)
 {
 	static uint8_t cData;
+	
+	//receive complete
+	while(!(SPSR & (1<<SPIF)));
+	
 	cData = SPDR;
 	DbgPrint("%c", cData);
 }
@@ -49,7 +55,15 @@ ISR(DD_IRQ)
 int main(void)
 {
 	char test_str [] = "Hello, What's your Name?\0";
-	SPI_MasterInit();
+	
+	cli();
+	
+	SPI_MasterInit();	
+	
+	EICRA = _BV(ISC01); // falling edge of generator interrupt
+	EIMSK = _BV(INT0);  // enable int0 
+	
+	sei();
 	
     while(1)
     {
