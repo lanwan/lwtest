@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{D1100916-62DA-4D80-A9B4-55A1E7CCEEB3}") = "spi_test", "spi_test\spi_test.avrgccproj", "{F84F4CE4-9987-4B2D-A355-45C665014553}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F84F4CE4-9987-4B2D-A355-45C665014553}.Debug|AVR.ActiveCfg = Debug|AVR
+		{F84F4CE4-9987-4B2D-A355-45C665014553}.Debug|AVR.Build.0 = Debug|AVR
+		{F84F4CE4-9987-4B2D-A355-45C665014553}.Release|AVR.ActiveCfg = Release|AVR
+		{F84F4CE4-9987-4B2D-A355-45C665014553}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
