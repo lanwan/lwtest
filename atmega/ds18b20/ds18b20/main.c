@@ -113,6 +113,11 @@ static void init_c_language(void)
 	stdout = &mystdout;
 }
 
+static int SmsEncode(char* str)
+{
+	
+}
+
 int main(void)
 {	
 	avr_uart_init(19200);
@@ -124,3 +129,5 @@ int main(void)
 		printf("%d\r\n", ds18b20_get_temp());
 	}		
 }
+
+
