@@ -1,0 +1,1261 @@
+
+biobot.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000872  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000032  00800060  00000872  00000906  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          000000f3  00800092  00800092  00000938  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  00000938  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000090  00000000  00000000  00001004  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_aranges 00000020  00000000  00000000  00001094  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_pubnames 00000064  00000000  00000000  000010b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   00000322  00000000  00000000  00001118  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000158  00000000  00000000  0000143a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   000002fd  00000000  00000000  00001592  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  00000050  00000000  00000000  00001890  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    000001c9  00000000  00000000  000018e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_pubtypes 0000004d  00000000  00000000  00001aa9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	e6 c2       	rjmp	.+1484   	; 0x5d6 <__vector_4>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	26 c0       	rjmp	.+76     	; 0x5e <__vector_8>
+  12:	28 c2       	rjmp	.+1104   	; 0x464 <__vector_9>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e2 e7       	ldi	r30, 0x72	; 114
+  3a:	f8 e0       	ldi	r31, 0x08	; 8
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a2 39       	cpi	r26, 0x92	; 146
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	11 e0       	ldi	r17, 0x01	; 1
+  4a:	a2 e9       	ldi	r26, 0x92	; 146
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a5 38       	cpi	r26, 0x85	; 133
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	6e d3       	rcall	.+1756   	; 0x736 <main>
+  5a:	09 c4       	rjmp	.+2066   	; 0x86e <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <__vector_8>:
+
+/**
+ * TIMER1(16bit)
+ */
+ISR( TIMER1_OVF_vect )
+{	    			
+  5e:	1f 92       	push	r1
+  60:	0f 92       	push	r0
+  62:	0f b6       	in	r0, 0x3f	; 63
+  64:	0f 92       	push	r0
+  66:	11 24       	eor	r1, r1
+  68:	2f 93       	push	r18
+  6a:	3f 93       	push	r19
+  6c:	4f 93       	push	r20
+  6e:	5f 93       	push	r21
+  70:	6f 93       	push	r22
+  72:	7f 93       	push	r23
+  74:	8f 93       	push	r24
+  76:	9f 93       	push	r25
+  78:	af 93       	push	r26
+  7a:	bf 93       	push	r27
+  7c:	ef 93       	push	r30
+  7e:	ff 93       	push	r31
+  80:	df 93       	push	r29
+  82:	cf 93       	push	r28
+  84:	cd b7       	in	r28, 0x3d	; 61
+  86:	de b7       	in	r29, 0x3e	; 62
+    //DEBUG_PULSE_HIGH();    
+    
+    if( gServos[gServoIndex].enabled == 0 ) goto inc_index;
+  88:	80 91 94 00 	lds	r24, 0x0094
+  8c:	28 2f       	mov	r18, r24
+  8e:	30 e0       	ldi	r19, 0x00	; 0
+  90:	c9 01       	movw	r24, r18
+  92:	88 0f       	add	r24, r24
+  94:	99 1f       	adc	r25, r25
+  96:	82 0f       	add	r24, r18
+  98:	93 1f       	adc	r25, r19
+  9a:	9c 01       	movw	r18, r24
+  9c:	22 0f       	add	r18, r18
+  9e:	33 1f       	adc	r19, r19
+  a0:	22 0f       	add	r18, r18
+  a2:	33 1f       	adc	r19, r19
+  a4:	82 0f       	add	r24, r18
+  a6:	93 1f       	adc	r25, r19
+  a8:	8b 56       	subi	r24, 0x6B	; 107
+  aa:	9f 4f       	sbci	r25, 0xFF	; 255
+  ac:	fc 01       	movw	r30, r24
+  ae:	80 81       	ld	r24, Z
+  b0:	88 23       	and	r24, r24
+  b2:	09 f4       	brne	.+2      	; 0xb6 <__vector_8+0x58>
+  b4:	b1 c1       	rjmp	.+866    	; 0x418 <__vector_8+0x3ba>
+		
+    // set current high pulse width
+    gServos[gServoIndex].current_pulse = gServos[gServoIndex].end_pulse;
+  b6:	80 91 94 00 	lds	r24, 0x0094
+  ba:	28 2f       	mov	r18, r24
+  bc:	30 e0       	ldi	r19, 0x00	; 0
+  be:	80 91 94 00 	lds	r24, 0x0094
+  c2:	48 2f       	mov	r20, r24
+  c4:	50 e0       	ldi	r21, 0x00	; 0
+  c6:	ca 01       	movw	r24, r20
+  c8:	88 0f       	add	r24, r24
+  ca:	99 1f       	adc	r25, r25
+  cc:	84 0f       	add	r24, r20
+  ce:	95 1f       	adc	r25, r21
+  d0:	ac 01       	movw	r20, r24
+  d2:	44 0f       	add	r20, r20
+  d4:	55 1f       	adc	r21, r21
+  d6:	44 0f       	add	r20, r20
+  d8:	55 1f       	adc	r21, r21
+  da:	84 0f       	add	r24, r20
+  dc:	95 1f       	adc	r25, r21
+  de:	87 56       	subi	r24, 0x67	; 103
+  e0:	9f 4f       	sbci	r25, 0xFF	; 255
+  e2:	fc 01       	movw	r30, r24
+  e4:	40 81       	ld	r20, Z
+  e6:	51 81       	ldd	r21, Z+1	; 0x01
+  e8:	c9 01       	movw	r24, r18
+  ea:	88 0f       	add	r24, r24
+  ec:	99 1f       	adc	r25, r25
+  ee:	82 0f       	add	r24, r18
+  f0:	93 1f       	adc	r25, r19
+  f2:	9c 01       	movw	r18, r24
+  f4:	22 0f       	add	r18, r18
+  f6:	33 1f       	adc	r19, r19
+  f8:	22 0f       	add	r18, r18
+  fa:	33 1f       	adc	r19, r19
+  fc:	82 0f       	add	r24, r18
+  fe:	93 1f       	adc	r25, r19
+ 100:	85 56       	subi	r24, 0x65	; 101
+ 102:	9f 4f       	sbci	r25, 0xFF	; 255
+ 104:	fc 01       	movw	r30, r24
+ 106:	51 83       	std	Z+1, r21	; 0x01
+ 108:	40 83       	st	Z, r20
+	
+    //set timer1 or timer2
+    if( gActiveServoIndex0 == -1 )
+ 10a:	80 91 60 00 	lds	r24, 0x0060
+ 10e:	8f 3f       	cpi	r24, 0xFF	; 255
+ 110:	09 f0       	breq	.+2      	; 0x114 <__vector_8+0xb6>
+ 112:	c0 c0       	rjmp	.+384    	; 0x294 <__vector_8+0x236>
+    {	               
+        gActiveServoIndex0 = gServoIndex;                              		                                   	
+ 114:	80 91 94 00 	lds	r24, 0x0094
+ 118:	80 93 60 00 	sts	0x0060, r24
+        gServos[gServoIndex].pulse_slot_header = gServos[gServoIndex].current_pulse % PULSE_SLOT_TIME + PULSE_SLOT_TIME;			
+ 11c:	80 91 94 00 	lds	r24, 0x0094
+ 120:	28 2f       	mov	r18, r24
+ 122:	30 e0       	ldi	r19, 0x00	; 0
+ 124:	80 91 94 00 	lds	r24, 0x0094
+ 128:	48 2f       	mov	r20, r24
+ 12a:	50 e0       	ldi	r21, 0x00	; 0
+ 12c:	ca 01       	movw	r24, r20
+ 12e:	88 0f       	add	r24, r24
+ 130:	99 1f       	adc	r25, r25
+ 132:	84 0f       	add	r24, r20
+ 134:	95 1f       	adc	r25, r21
+ 136:	ac 01       	movw	r20, r24
+ 138:	44 0f       	add	r20, r20
+ 13a:	55 1f       	adc	r21, r21
+ 13c:	44 0f       	add	r20, r20
+ 13e:	55 1f       	adc	r21, r21
+ 140:	84 0f       	add	r24, r20
+ 142:	95 1f       	adc	r25, r21
+ 144:	85 56       	subi	r24, 0x65	; 101
+ 146:	9f 4f       	sbci	r25, 0xFF	; 255
+ 148:	fc 01       	movw	r30, r24
+ 14a:	80 81       	ld	r24, Z
+ 14c:	91 81       	ldd	r25, Z+1	; 0x01
+ 14e:	44 e6       	ldi	r20, 0x64	; 100
+ 150:	50 e0       	ldi	r21, 0x00	; 0
+ 152:	ba 01       	movw	r22, r20
+ 154:	78 d3       	rcall	.+1776   	; 0x846 <__udivmodhi4>
+ 156:	ac 01       	movw	r20, r24
+ 158:	4c 59       	subi	r20, 0x9C	; 156
+ 15a:	5f 4f       	sbci	r21, 0xFF	; 255
+ 15c:	c9 01       	movw	r24, r18
+ 15e:	88 0f       	add	r24, r24
+ 160:	99 1f       	adc	r25, r25
+ 162:	82 0f       	add	r24, r18
+ 164:	93 1f       	adc	r25, r19
+ 166:	9c 01       	movw	r18, r24
+ 168:	22 0f       	add	r18, r18
+ 16a:	33 1f       	adc	r19, r19
+ 16c:	22 0f       	add	r18, r18
+ 16e:	33 1f       	adc	r19, r19
+ 170:	82 0f       	add	r24, r18
+ 172:	93 1f       	adc	r25, r19
+ 174:	8f 55       	subi	r24, 0x5F	; 95
+ 176:	9f 4f       	sbci	r25, 0xFF	; 255
+ 178:	fc 01       	movw	r30, r24
+ 17a:	51 83       	std	Z+1, r21	; 0x01
+ 17c:	40 83       	st	Z, r20
+        gServos[gServoIndex].pulse_slot_count = gServos[gServoIndex].current_pulse / PULSE_SLOT_TIME - 1;                                    			
+ 17e:	80 91 94 00 	lds	r24, 0x0094
+ 182:	28 2f       	mov	r18, r24
+ 184:	30 e0       	ldi	r19, 0x00	; 0
+ 186:	80 91 94 00 	lds	r24, 0x0094
+ 18a:	48 2f       	mov	r20, r24
+ 18c:	50 e0       	ldi	r21, 0x00	; 0
+ 18e:	ca 01       	movw	r24, r20
+ 190:	88 0f       	add	r24, r24
+ 192:	99 1f       	adc	r25, r25
+ 194:	84 0f       	add	r24, r20
+ 196:	95 1f       	adc	r25, r21
+ 198:	ac 01       	movw	r20, r24
+ 19a:	44 0f       	add	r20, r20
+ 19c:	55 1f       	adc	r21, r21
+ 19e:	44 0f       	add	r20, r20
+ 1a0:	55 1f       	adc	r21, r21
+ 1a2:	84 0f       	add	r24, r20
+ 1a4:	95 1f       	adc	r25, r21
+ 1a6:	85 56       	subi	r24, 0x65	; 101
+ 1a8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 1aa:	fc 01       	movw	r30, r24
+ 1ac:	80 81       	ld	r24, Z
+ 1ae:	91 81       	ldd	r25, Z+1	; 0x01
+ 1b0:	44 e6       	ldi	r20, 0x64	; 100
+ 1b2:	50 e0       	ldi	r21, 0x00	; 0
+ 1b4:	ba 01       	movw	r22, r20
+ 1b6:	47 d3       	rcall	.+1678   	; 0x846 <__udivmodhi4>
+ 1b8:	ab 01       	movw	r20, r22
+ 1ba:	ca 01       	movw	r24, r20
+ 1bc:	ac 01       	movw	r20, r24
+ 1be:	41 50       	subi	r20, 0x01	; 1
+ 1c0:	50 40       	sbci	r21, 0x00	; 0
+ 1c2:	c9 01       	movw	r24, r18
+ 1c4:	88 0f       	add	r24, r24
+ 1c6:	99 1f       	adc	r25, r25
+ 1c8:	82 0f       	add	r24, r18
+ 1ca:	93 1f       	adc	r25, r19
+ 1cc:	9c 01       	movw	r18, r24
+ 1ce:	22 0f       	add	r18, r18
+ 1d0:	33 1f       	adc	r19, r19
+ 1d2:	22 0f       	add	r18, r18
+ 1d4:	33 1f       	adc	r19, r19
+ 1d6:	82 0f       	add	r24, r18
+ 1d8:	93 1f       	adc	r25, r19
+ 1da:	81 56       	subi	r24, 0x61	; 97
+ 1dc:	9f 4f       	sbci	r25, 0xFF	; 255
+ 1de:	fc 01       	movw	r30, r24
+ 1e0:	51 83       	std	Z+1, r21	; 0x01
+ 1e2:	40 83       	st	Z, r20
+        
+        // set high pulse
+        DEBUG_PULSE_HIGH();
+ 1e4:	82 e3       	ldi	r24, 0x32	; 50
+ 1e6:	90 e0       	ldi	r25, 0x00	; 0
+ 1e8:	22 e3       	ldi	r18, 0x32	; 50
+ 1ea:	30 e0       	ldi	r19, 0x00	; 0
+ 1ec:	f9 01       	movw	r30, r18
+ 1ee:	20 81       	ld	r18, Z
+ 1f0:	21 60       	ori	r18, 0x01	; 1
+ 1f2:	fc 01       	movw	r30, r24
+ 1f4:	20 83       	st	Z, r18
+        *(gServoPorts[gServoIndex]) |= _BV(gServoPins[gServoIndex]);
+ 1f6:	80 91 94 00 	lds	r24, 0x0094
+ 1fa:	88 2f       	mov	r24, r24
+ 1fc:	90 e0       	ldi	r25, 0x00	; 0
+ 1fe:	88 0f       	add	r24, r24
+ 200:	99 1f       	adc	r25, r25
+ 202:	8e 58       	subi	r24, 0x8E	; 142
+ 204:	9f 4f       	sbci	r25, 0xFF	; 255
+ 206:	fc 01       	movw	r30, r24
+ 208:	80 81       	ld	r24, Z
+ 20a:	91 81       	ldd	r25, Z+1	; 0x01
+ 20c:	fc 01       	movw	r30, r24
+ 20e:	20 81       	ld	r18, Z
+ 210:	62 2f       	mov	r22, r18
+ 212:	20 91 94 00 	lds	r18, 0x0094
+ 216:	22 2f       	mov	r18, r18
+ 218:	30 e0       	ldi	r19, 0x00	; 0
+ 21a:	2e 59       	subi	r18, 0x9E	; 158
+ 21c:	3f 4f       	sbci	r19, 0xFF	; 255
+ 21e:	f9 01       	movw	r30, r18
+ 220:	20 81       	ld	r18, Z
+ 222:	42 2f       	mov	r20, r18
+ 224:	50 e0       	ldi	r21, 0x00	; 0
+ 226:	21 e0       	ldi	r18, 0x01	; 1
+ 228:	30 e0       	ldi	r19, 0x00	; 0
+ 22a:	02 c0       	rjmp	.+4      	; 0x230 <__vector_8+0x1d2>
+ 22c:	22 0f       	add	r18, r18
+ 22e:	33 1f       	adc	r19, r19
+ 230:	4a 95       	dec	r20
+ 232:	e2 f7       	brpl	.-8      	; 0x22c <__vector_8+0x1ce>
+ 234:	26 2b       	or	r18, r22
+ 236:	fc 01       	movw	r30, r24
+ 238:	20 83       	st	Z, r18
+	
+        TIFR &= ~_BV(TOV0);
+ 23a:	88 e5       	ldi	r24, 0x58	; 88
+ 23c:	90 e0       	ldi	r25, 0x00	; 0
+ 23e:	28 e5       	ldi	r18, 0x58	; 88
+ 240:	30 e0       	ldi	r19, 0x00	; 0
+ 242:	f9 01       	movw	r30, r18
+ 244:	20 81       	ld	r18, Z
+ 246:	2e 7f       	andi	r18, 0xFE	; 254
+ 248:	fc 01       	movw	r30, r24
+ 24a:	20 83       	st	Z, r18
+        TCNT0 = 0xFF - (gServos[gServoIndex].pulse_slot_header & 0xFF); // must be first
+ 24c:	42 e5       	ldi	r20, 0x52	; 82
+ 24e:	50 e0       	ldi	r21, 0x00	; 0
+ 250:	80 91 94 00 	lds	r24, 0x0094
+ 254:	28 2f       	mov	r18, r24
+ 256:	30 e0       	ldi	r19, 0x00	; 0
+ 258:	c9 01       	movw	r24, r18
+ 25a:	88 0f       	add	r24, r24
+ 25c:	99 1f       	adc	r25, r25
+ 25e:	82 0f       	add	r24, r18
+ 260:	93 1f       	adc	r25, r19
+ 262:	9c 01       	movw	r18, r24
+ 264:	22 0f       	add	r18, r18
+ 266:	33 1f       	adc	r19, r19
+ 268:	22 0f       	add	r18, r18
+ 26a:	33 1f       	adc	r19, r19
+ 26c:	82 0f       	add	r24, r18
+ 26e:	93 1f       	adc	r25, r19
+ 270:	8f 55       	subi	r24, 0x5F	; 95
+ 272:	9f 4f       	sbci	r25, 0xFF	; 255
+ 274:	fc 01       	movw	r30, r24
+ 276:	80 81       	ld	r24, Z
+ 278:	91 81       	ldd	r25, Z+1	; 0x01
+ 27a:	80 95       	com	r24
+ 27c:	fa 01       	movw	r30, r20
+ 27e:	80 83       	st	Z, r24
+        TIMSK |= _BV(TOIE0);        
+ 280:	89 e5       	ldi	r24, 0x59	; 89
+ 282:	90 e0       	ldi	r25, 0x00	; 0
+ 284:	29 e5       	ldi	r18, 0x59	; 89
+ 286:	30 e0       	ldi	r19, 0x00	; 0
+ 288:	f9 01       	movw	r30, r18
+ 28a:	20 81       	ld	r18, Z
+ 28c:	21 60       	ori	r18, 0x01	; 1
+ 28e:	fc 01       	movw	r30, r24
+ 290:	20 83       	st	Z, r18
+ 292:	c3 c0       	rjmp	.+390    	; 0x41a <__vector_8+0x3bc>
+    }
+    else if( gActiveServoIndex1 == -1 )
+ 294:	80 91 61 00 	lds	r24, 0x0061
+ 298:	8f 3f       	cpi	r24, 0xFF	; 255
+ 29a:	09 f0       	breq	.+2      	; 0x29e <__vector_8+0x240>
+ 29c:	b8 c0       	rjmp	.+368    	; 0x40e <__vector_8+0x3b0>
+    {	
+        gActiveServoIndex1 = gServoIndex;       		
+ 29e:	80 91 94 00 	lds	r24, 0x0094
+ 2a2:	80 93 61 00 	sts	0x0061, r24
+        gServos[gServoIndex].pulse_slot_header = gServos[gServoIndex].current_pulse % PULSE_SLOT_TIME + PULSE_SLOT_TIME;			
+ 2a6:	80 91 94 00 	lds	r24, 0x0094
+ 2aa:	28 2f       	mov	r18, r24
+ 2ac:	30 e0       	ldi	r19, 0x00	; 0
+ 2ae:	80 91 94 00 	lds	r24, 0x0094
+ 2b2:	48 2f       	mov	r20, r24
+ 2b4:	50 e0       	ldi	r21, 0x00	; 0
+ 2b6:	ca 01       	movw	r24, r20
+ 2b8:	88 0f       	add	r24, r24
+ 2ba:	99 1f       	adc	r25, r25
+ 2bc:	84 0f       	add	r24, r20
+ 2be:	95 1f       	adc	r25, r21
+ 2c0:	ac 01       	movw	r20, r24
+ 2c2:	44 0f       	add	r20, r20
+ 2c4:	55 1f       	adc	r21, r21
+ 2c6:	44 0f       	add	r20, r20
+ 2c8:	55 1f       	adc	r21, r21
+ 2ca:	84 0f       	add	r24, r20
+ 2cc:	95 1f       	adc	r25, r21
+ 2ce:	85 56       	subi	r24, 0x65	; 101
+ 2d0:	9f 4f       	sbci	r25, 0xFF	; 255
+ 2d2:	fc 01       	movw	r30, r24
+ 2d4:	80 81       	ld	r24, Z
+ 2d6:	91 81       	ldd	r25, Z+1	; 0x01
+ 2d8:	44 e6       	ldi	r20, 0x64	; 100
+ 2da:	50 e0       	ldi	r21, 0x00	; 0
+ 2dc:	ba 01       	movw	r22, r20
+ 2de:	b3 d2       	rcall	.+1382   	; 0x846 <__udivmodhi4>
+ 2e0:	ac 01       	movw	r20, r24
+ 2e2:	4c 59       	subi	r20, 0x9C	; 156
+ 2e4:	5f 4f       	sbci	r21, 0xFF	; 255
+ 2e6:	c9 01       	movw	r24, r18
+ 2e8:	88 0f       	add	r24, r24
+ 2ea:	99 1f       	adc	r25, r25
+ 2ec:	82 0f       	add	r24, r18
+ 2ee:	93 1f       	adc	r25, r19
+ 2f0:	9c 01       	movw	r18, r24
+ 2f2:	22 0f       	add	r18, r18
+ 2f4:	33 1f       	adc	r19, r19
+ 2f6:	22 0f       	add	r18, r18
+ 2f8:	33 1f       	adc	r19, r19
+ 2fa:	82 0f       	add	r24, r18
+ 2fc:	93 1f       	adc	r25, r19
+ 2fe:	8f 55       	subi	r24, 0x5F	; 95
+ 300:	9f 4f       	sbci	r25, 0xFF	; 255
+ 302:	fc 01       	movw	r30, r24
+ 304:	51 83       	std	Z+1, r21	; 0x01
+ 306:	40 83       	st	Z, r20
+        gServos[gServoIndex].pulse_slot_count = gServos[gServoIndex].current_pulse / PULSE_SLOT_TIME - 1;                                    			
+ 308:	80 91 94 00 	lds	r24, 0x0094
+ 30c:	28 2f       	mov	r18, r24
+ 30e:	30 e0       	ldi	r19, 0x00	; 0
+ 310:	80 91 94 00 	lds	r24, 0x0094
+ 314:	48 2f       	mov	r20, r24
+ 316:	50 e0       	ldi	r21, 0x00	; 0
+ 318:	ca 01       	movw	r24, r20
+ 31a:	88 0f       	add	r24, r24
+ 31c:	99 1f       	adc	r25, r25
+ 31e:	84 0f       	add	r24, r20
+ 320:	95 1f       	adc	r25, r21
+ 322:	ac 01       	movw	r20, r24
+ 324:	44 0f       	add	r20, r20
+ 326:	55 1f       	adc	r21, r21
+ 328:	44 0f       	add	r20, r20
+ 32a:	55 1f       	adc	r21, r21
+ 32c:	84 0f       	add	r24, r20
+ 32e:	95 1f       	adc	r25, r21
+ 330:	85 56       	subi	r24, 0x65	; 101
+ 332:	9f 4f       	sbci	r25, 0xFF	; 255
+ 334:	fc 01       	movw	r30, r24
+ 336:	80 81       	ld	r24, Z
+ 338:	91 81       	ldd	r25, Z+1	; 0x01
+ 33a:	44 e6       	ldi	r20, 0x64	; 100
+ 33c:	50 e0       	ldi	r21, 0x00	; 0
+ 33e:	ba 01       	movw	r22, r20
+ 340:	82 d2       	rcall	.+1284   	; 0x846 <__udivmodhi4>
+ 342:	ab 01       	movw	r20, r22
+ 344:	ca 01       	movw	r24, r20
+ 346:	ac 01       	movw	r20, r24
+ 348:	41 50       	subi	r20, 0x01	; 1
+ 34a:	50 40       	sbci	r21, 0x00	; 0
+ 34c:	c9 01       	movw	r24, r18
+ 34e:	88 0f       	add	r24, r24
+ 350:	99 1f       	adc	r25, r25
+ 352:	82 0f       	add	r24, r18
+ 354:	93 1f       	adc	r25, r19
+ 356:	9c 01       	movw	r18, r24
+ 358:	22 0f       	add	r18, r18
+ 35a:	33 1f       	adc	r19, r19
+ 35c:	22 0f       	add	r18, r18
+ 35e:	33 1f       	adc	r19, r19
+ 360:	82 0f       	add	r24, r18
+ 362:	93 1f       	adc	r25, r19
+ 364:	81 56       	subi	r24, 0x61	; 97
+ 366:	9f 4f       	sbci	r25, 0xFF	; 255
+ 368:	fc 01       	movw	r30, r24
+ 36a:	51 83       	std	Z+1, r21	; 0x01
+ 36c:	40 83       	st	Z, r20
+
+        // set high pulse
+        *(gServoPorts[gServoIndex]) |= _BV(gServoPins[gServoIndex]);
+ 36e:	80 91 94 00 	lds	r24, 0x0094
+ 372:	88 2f       	mov	r24, r24
+ 374:	90 e0       	ldi	r25, 0x00	; 0
+ 376:	88 0f       	add	r24, r24
+ 378:	99 1f       	adc	r25, r25
+ 37a:	8e 58       	subi	r24, 0x8E	; 142
+ 37c:	9f 4f       	sbci	r25, 0xFF	; 255
+ 37e:	fc 01       	movw	r30, r24
+ 380:	80 81       	ld	r24, Z
+ 382:	91 81       	ldd	r25, Z+1	; 0x01
+ 384:	fc 01       	movw	r30, r24
+ 386:	20 81       	ld	r18, Z
+ 388:	62 2f       	mov	r22, r18
+ 38a:	20 91 94 00 	lds	r18, 0x0094
+ 38e:	22 2f       	mov	r18, r18
+ 390:	30 e0       	ldi	r19, 0x00	; 0
+ 392:	2e 59       	subi	r18, 0x9E	; 158
+ 394:	3f 4f       	sbci	r19, 0xFF	; 255
+ 396:	f9 01       	movw	r30, r18
+ 398:	20 81       	ld	r18, Z
+ 39a:	42 2f       	mov	r20, r18
+ 39c:	50 e0       	ldi	r21, 0x00	; 0
+ 39e:	21 e0       	ldi	r18, 0x01	; 1
+ 3a0:	30 e0       	ldi	r19, 0x00	; 0
+ 3a2:	02 c0       	rjmp	.+4      	; 0x3a8 <__vector_8+0x34a>
+ 3a4:	22 0f       	add	r18, r18
+ 3a6:	33 1f       	adc	r19, r19
+ 3a8:	4a 95       	dec	r20
+ 3aa:	e2 f7       	brpl	.-8      	; 0x3a4 <__vector_8+0x346>
+ 3ac:	26 2b       	or	r18, r22
+ 3ae:	fc 01       	movw	r30, r24
+ 3b0:	20 83       	st	Z, r18
+	
+        TIFR &= ~_BV(TOV2);
+ 3b2:	88 e5       	ldi	r24, 0x58	; 88
+ 3b4:	90 e0       	ldi	r25, 0x00	; 0
+ 3b6:	28 e5       	ldi	r18, 0x58	; 88
+ 3b8:	30 e0       	ldi	r19, 0x00	; 0
+ 3ba:	f9 01       	movw	r30, r18
+ 3bc:	20 81       	ld	r18, Z
+ 3be:	2f 7b       	andi	r18, 0xBF	; 191
+ 3c0:	fc 01       	movw	r30, r24
+ 3c2:	20 83       	st	Z, r18
+        TCNT2 = 0xFF - (gServos[gServoIndex].pulse_slot_header & 0xFF) - 20; // must be first
+ 3c4:	44 e4       	ldi	r20, 0x44	; 68
+ 3c6:	50 e0       	ldi	r21, 0x00	; 0
+ 3c8:	80 91 94 00 	lds	r24, 0x0094
+ 3cc:	28 2f       	mov	r18, r24
+ 3ce:	30 e0       	ldi	r19, 0x00	; 0
+ 3d0:	c9 01       	movw	r24, r18
+ 3d2:	88 0f       	add	r24, r24
+ 3d4:	99 1f       	adc	r25, r25
+ 3d6:	82 0f       	add	r24, r18
+ 3d8:	93 1f       	adc	r25, r19
+ 3da:	9c 01       	movw	r18, r24
+ 3dc:	22 0f       	add	r18, r18
+ 3de:	33 1f       	adc	r19, r19
+ 3e0:	22 0f       	add	r18, r18
+ 3e2:	33 1f       	adc	r19, r19
+ 3e4:	82 0f       	add	r24, r18
+ 3e6:	93 1f       	adc	r25, r19
+ 3e8:	8f 55       	subi	r24, 0x5F	; 95
+ 3ea:	9f 4f       	sbci	r25, 0xFF	; 255
+ 3ec:	fc 01       	movw	r30, r24
+ 3ee:	80 81       	ld	r24, Z
+ 3f0:	91 81       	ldd	r25, Z+1	; 0x01
+ 3f2:	80 95       	com	r24
+ 3f4:	84 51       	subi	r24, 0x14	; 20
+ 3f6:	fa 01       	movw	r30, r20
+ 3f8:	80 83       	st	Z, r24
+        TIMSK |= _BV(TOIE2);                                                                                  	                                				
+ 3fa:	89 e5       	ldi	r24, 0x59	; 89
+ 3fc:	90 e0       	ldi	r25, 0x00	; 0
+ 3fe:	29 e5       	ldi	r18, 0x59	; 89
+ 400:	30 e0       	ldi	r19, 0x00	; 0
+ 402:	f9 01       	movw	r30, r18
+ 404:	20 81       	ld	r18, Z
+ 406:	20 64       	ori	r18, 0x40	; 64
+ 408:	fc 01       	movw	r30, r24
+ 40a:	20 83       	st	Z, r18
+ 40c:	06 c0       	rjmp	.+12     	; 0x41a <__vector_8+0x3bc>
+    }
+    else{
+        TIMSK = 0;
+ 40e:	89 e5       	ldi	r24, 0x59	; 89
+ 410:	90 e0       	ldi	r25, 0x00	; 0
+ 412:	fc 01       	movw	r30, r24
+ 414:	10 82       	st	Z, r1
+ 416:	01 c0       	rjmp	.+2      	; 0x41a <__vector_8+0x3bc>
+ */
+ISR( TIMER1_OVF_vect )
+{	    			
+    //DEBUG_PULSE_HIGH();    
+    
+    if( gServos[gServoIndex].enabled == 0 ) goto inc_index;
+ 418:	00 00       	nop
+    else{
+        TIMSK = 0;
+    }		
+
+inc_index:		
+	gServoIndex++;
+ 41a:	80 91 94 00 	lds	r24, 0x0094
+ 41e:	8f 5f       	subi	r24, 0xFF	; 255
+ 420:	80 93 94 00 	sts	0x0094, r24
+	if( gServoIndex >= PIN_COUNT )  gServoIndex = PIN0;    	
+ 424:	80 91 94 00 	lds	r24, 0x0094
+ 428:	80 31       	cpi	r24, 0x10	; 16
+ 42a:	10 f0       	brcs	.+4      	; 0x430 <__vector_8+0x3d2>
+ 42c:	10 92 94 00 	sts	0x0094, r1
+    
+// reload counter
+    TCNT1 = MAIN_SLOT_RELOAD_COUNTER;  
+ 430:	8c e4       	ldi	r24, 0x4C	; 76
+ 432:	90 e0       	ldi	r25, 0x00	; 0
+ 434:	2d e1       	ldi	r18, 0x1D	; 29
+ 436:	3b ef       	ldi	r19, 0xFB	; 251
+ 438:	fc 01       	movw	r30, r24
+ 43a:	31 83       	std	Z+1, r19	; 0x01
+ 43c:	20 83       	st	Z, r18
+    
+   // DEBUG_PULSE_LOW();      	
+}
+ 43e:	cf 91       	pop	r28
+ 440:	df 91       	pop	r29
+ 442:	ff 91       	pop	r31
+ 444:	ef 91       	pop	r30
+ 446:	bf 91       	pop	r27
+ 448:	af 91       	pop	r26
+ 44a:	9f 91       	pop	r25
+ 44c:	8f 91       	pop	r24
+ 44e:	7f 91       	pop	r23
+ 450:	6f 91       	pop	r22
+ 452:	5f 91       	pop	r21
+ 454:	4f 91       	pop	r20
+ 456:	3f 91       	pop	r19
+ 458:	2f 91       	pop	r18
+ 45a:	0f 90       	pop	r0
+ 45c:	0f be       	out	0x3f, r0	; 63
+ 45e:	0f 90       	pop	r0
+ 460:	1f 90       	pop	r1
+ 462:	18 95       	reti
+
+00000464 <__vector_9>:
+/**
+ * TIMER0(8bit)
+ * T slot time=100us
+ */
+ISR( TIMER0_OVF_vect )
+{      
+ 464:	1f 92       	push	r1
+ 466:	0f 92       	push	r0
+ 468:	0f b6       	in	r0, 0x3f	; 63
+ 46a:	0f 92       	push	r0
+ 46c:	11 24       	eor	r1, r1
+ 46e:	2f 93       	push	r18
+ 470:	3f 93       	push	r19
+ 472:	4f 93       	push	r20
+ 474:	5f 93       	push	r21
+ 476:	6f 93       	push	r22
+ 478:	8f 93       	push	r24
+ 47a:	9f 93       	push	r25
+ 47c:	ef 93       	push	r30
+ 47e:	ff 93       	push	r31
+ 480:	df 93       	push	r29
+ 482:	cf 93       	push	r28
+ 484:	cd b7       	in	r28, 0x3d	; 61
+ 486:	de b7       	in	r29, 0x3e	; 62
+	TIMSK &= ~_BV(TOIE0);	
+ 488:	89 e5       	ldi	r24, 0x59	; 89
+ 48a:	90 e0       	ldi	r25, 0x00	; 0
+ 48c:	29 e5       	ldi	r18, 0x59	; 89
+ 48e:	30 e0       	ldi	r19, 0x00	; 0
+ 490:	f9 01       	movw	r30, r18
+ 492:	20 81       	ld	r18, Z
+ 494:	2e 7f       	andi	r18, 0xFE	; 254
+ 496:	fc 01       	movw	r30, r24
+ 498:	20 83       	st	Z, r18
+    TIFR &= ~_BV(TOV0);			
+ 49a:	88 e5       	ldi	r24, 0x58	; 88
+ 49c:	90 e0       	ldi	r25, 0x00	; 0
+ 49e:	28 e5       	ldi	r18, 0x58	; 88
+ 4a0:	30 e0       	ldi	r19, 0x00	; 0
+ 4a2:	f9 01       	movw	r30, r18
+ 4a4:	20 81       	ld	r18, Z
+ 4a6:	2e 7f       	andi	r18, 0xFE	; 254
+ 4a8:	fc 01       	movw	r30, r24
+ 4aa:	20 83       	st	Z, r18
+	
+	if( gServos[gActiveServoIndex0].pulse_slot_count == 0 ){
+ 4ac:	80 91 60 00 	lds	r24, 0x0060
+ 4b0:	28 2f       	mov	r18, r24
+ 4b2:	33 27       	eor	r19, r19
+ 4b4:	27 fd       	sbrc	r18, 7
+ 4b6:	30 95       	com	r19
+ 4b8:	c9 01       	movw	r24, r18
+ 4ba:	88 0f       	add	r24, r24
+ 4bc:	99 1f       	adc	r25, r25
+ 4be:	82 0f       	add	r24, r18
+ 4c0:	93 1f       	adc	r25, r19
+ 4c2:	9c 01       	movw	r18, r24
+ 4c4:	22 0f       	add	r18, r18
+ 4c6:	33 1f       	adc	r19, r19
+ 4c8:	22 0f       	add	r18, r18
+ 4ca:	33 1f       	adc	r19, r19
+ 4cc:	82 0f       	add	r24, r18
+ 4ce:	93 1f       	adc	r25, r19
+ 4d0:	81 56       	subi	r24, 0x61	; 97
+ 4d2:	9f 4f       	sbci	r25, 0xFF	; 255
+ 4d4:	fc 01       	movw	r30, r24
+ 4d6:	80 81       	ld	r24, Z
+ 4d8:	91 81       	ldd	r25, Z+1	; 0x01
+ 4da:	00 97       	sbiw	r24, 0x00	; 0
+ 4dc:	99 f5       	brne	.+102    	; 0x544 <__vector_9+0xe0>
+        // set low pulse
+	    *(gServoPorts[gActiveServoIndex0]) &= ~_BV(gServoPins[gActiveServoIndex0]);	
+ 4de:	80 91 60 00 	lds	r24, 0x0060
+ 4e2:	99 27       	eor	r25, r25
+ 4e4:	87 fd       	sbrc	r24, 7
+ 4e6:	90 95       	com	r25
+ 4e8:	88 0f       	add	r24, r24
+ 4ea:	99 1f       	adc	r25, r25
+ 4ec:	8e 58       	subi	r24, 0x8E	; 142
+ 4ee:	9f 4f       	sbci	r25, 0xFF	; 255
+ 4f0:	fc 01       	movw	r30, r24
+ 4f2:	80 81       	ld	r24, Z
+ 4f4:	91 81       	ldd	r25, Z+1	; 0x01
+ 4f6:	fc 01       	movw	r30, r24
+ 4f8:	20 81       	ld	r18, Z
+ 4fa:	62 2f       	mov	r22, r18
+ 4fc:	20 91 60 00 	lds	r18, 0x0060
+ 500:	33 27       	eor	r19, r19
+ 502:	27 fd       	sbrc	r18, 7
+ 504:	30 95       	com	r19
+ 506:	2e 59       	subi	r18, 0x9E	; 158
+ 508:	3f 4f       	sbci	r19, 0xFF	; 255
+ 50a:	f9 01       	movw	r30, r18
+ 50c:	20 81       	ld	r18, Z
+ 50e:	42 2f       	mov	r20, r18
+ 510:	50 e0       	ldi	r21, 0x00	; 0
+ 512:	21 e0       	ldi	r18, 0x01	; 1
+ 514:	30 e0       	ldi	r19, 0x00	; 0
+ 516:	04 2e       	mov	r0, r20
+ 518:	02 c0       	rjmp	.+4      	; 0x51e <__vector_9+0xba>
+ 51a:	22 0f       	add	r18, r18
+ 51c:	33 1f       	adc	r19, r19
+ 51e:	0a 94       	dec	r0
+ 520:	e2 f7       	brpl	.-8      	; 0x51a <__vector_9+0xb6>
+ 522:	20 95       	com	r18
+ 524:	26 23       	and	r18, r22
+ 526:	fc 01       	movw	r30, r24
+ 528:	20 83       	st	Z, r18
+        gActiveServoIndex0 = -1; // timer 1 idle status	
+ 52a:	8f ef       	ldi	r24, 0xFF	; 255
+ 52c:	80 93 60 00 	sts	0x0060, r24
+        
+        DEBUG_PULSE_LOW();	
+ 530:	82 e3       	ldi	r24, 0x32	; 50
+ 532:	90 e0       	ldi	r25, 0x00	; 0
+ 534:	22 e3       	ldi	r18, 0x32	; 50
+ 536:	30 e0       	ldi	r19, 0x00	; 0
+ 538:	f9 01       	movw	r30, r18
+ 53a:	20 81       	ld	r18, Z
+ 53c:	2e 7f       	andi	r18, 0xFE	; 254
+ 53e:	fc 01       	movw	r30, r24
+ 540:	20 83       	st	Z, r18
+ 542:	39 c0       	rjmp	.+114    	; 0x5b6 <__vector_9+0x152>
+	}
+	else{
+        TCNT0 = PULSE_SLOT_RELOAD_COUNT; // must be first
+ 544:	82 e5       	ldi	r24, 0x52	; 82
+ 546:	90 e0       	ldi	r25, 0x00	; 0
+ 548:	2e e8       	ldi	r18, 0x8E	; 142
+ 54a:	fc 01       	movw	r30, r24
+ 54c:	20 83       	st	Z, r18
+        TIMSK |= _BV(TOIE0);
+ 54e:	89 e5       	ldi	r24, 0x59	; 89
+ 550:	90 e0       	ldi	r25, 0x00	; 0
+ 552:	29 e5       	ldi	r18, 0x59	; 89
+ 554:	30 e0       	ldi	r19, 0x00	; 0
+ 556:	f9 01       	movw	r30, r18
+ 558:	20 81       	ld	r18, Z
+ 55a:	21 60       	ori	r18, 0x01	; 1
+ 55c:	fc 01       	movw	r30, r24
+ 55e:	20 83       	st	Z, r18
+        gServos[gActiveServoIndex0].pulse_slot_count --;		
+ 560:	80 91 60 00 	lds	r24, 0x0060
+ 564:	28 2f       	mov	r18, r24
+ 566:	33 27       	eor	r19, r19
+ 568:	27 fd       	sbrc	r18, 7
+ 56a:	30 95       	com	r19
+ 56c:	c9 01       	movw	r24, r18
+ 56e:	88 0f       	add	r24, r24
+ 570:	99 1f       	adc	r25, r25
+ 572:	82 0f       	add	r24, r18
+ 574:	93 1f       	adc	r25, r19
+ 576:	ac 01       	movw	r20, r24
+ 578:	44 0f       	add	r20, r20
+ 57a:	55 1f       	adc	r21, r21
+ 57c:	44 0f       	add	r20, r20
+ 57e:	55 1f       	adc	r21, r21
+ 580:	84 0f       	add	r24, r20
+ 582:	95 1f       	adc	r25, r21
+ 584:	81 56       	subi	r24, 0x61	; 97
+ 586:	9f 4f       	sbci	r25, 0xFF	; 255
+ 588:	fc 01       	movw	r30, r24
+ 58a:	80 81       	ld	r24, Z
+ 58c:	91 81       	ldd	r25, Z+1	; 0x01
+ 58e:	ac 01       	movw	r20, r24
+ 590:	41 50       	subi	r20, 0x01	; 1
+ 592:	50 40       	sbci	r21, 0x00	; 0
+ 594:	c9 01       	movw	r24, r18
+ 596:	88 0f       	add	r24, r24
+ 598:	99 1f       	adc	r25, r25
+ 59a:	82 0f       	add	r24, r18
+ 59c:	93 1f       	adc	r25, r19
+ 59e:	9c 01       	movw	r18, r24
+ 5a0:	22 0f       	add	r18, r18
+ 5a2:	33 1f       	adc	r19, r19
+ 5a4:	22 0f       	add	r18, r18
+ 5a6:	33 1f       	adc	r19, r19
+ 5a8:	82 0f       	add	r24, r18
+ 5aa:	93 1f       	adc	r25, r19
+ 5ac:	81 56       	subi	r24, 0x61	; 97
+ 5ae:	9f 4f       	sbci	r25, 0xFF	; 255
+ 5b0:	fc 01       	movw	r30, r24
+ 5b2:	51 83       	std	Z+1, r21	; 0x01
+ 5b4:	40 83       	st	Z, r20
+	}		       
+}
+ 5b6:	cf 91       	pop	r28
+ 5b8:	df 91       	pop	r29
+ 5ba:	ff 91       	pop	r31
+ 5bc:	ef 91       	pop	r30
+ 5be:	9f 91       	pop	r25
+ 5c0:	8f 91       	pop	r24
+ 5c2:	6f 91       	pop	r22
+ 5c4:	5f 91       	pop	r21
+ 5c6:	4f 91       	pop	r20
+ 5c8:	3f 91       	pop	r19
+ 5ca:	2f 91       	pop	r18
+ 5cc:	0f 90       	pop	r0
+ 5ce:	0f be       	out	0x3f, r0	; 63
+ 5d0:	0f 90       	pop	r0
+ 5d2:	1f 90       	pop	r1
+ 5d4:	18 95       	reti
+
+000005d6 <__vector_4>:
+/**
+ * TIMER2(8bit)
+ * T slot time=100us
+ */
+ISR( TIMER2_OVF_vect )
+{       
+ 5d6:	1f 92       	push	r1
+ 5d8:	0f 92       	push	r0
+ 5da:	0f b6       	in	r0, 0x3f	; 63
+ 5dc:	0f 92       	push	r0
+ 5de:	11 24       	eor	r1, r1
+ 5e0:	2f 93       	push	r18
+ 5e2:	3f 93       	push	r19
+ 5e4:	4f 93       	push	r20
+ 5e6:	5f 93       	push	r21
+ 5e8:	6f 93       	push	r22
+ 5ea:	8f 93       	push	r24
+ 5ec:	9f 93       	push	r25
+ 5ee:	ef 93       	push	r30
+ 5f0:	ff 93       	push	r31
+ 5f2:	df 93       	push	r29
+ 5f4:	cf 93       	push	r28
+ 5f6:	cd b7       	in	r28, 0x3d	; 61
+ 5f8:	de b7       	in	r29, 0x3e	; 62
+    //DEBUG_PULSE_HIGH();
+    
+	TIMSK &= ~_BV(TOIE2);		
+ 5fa:	89 e5       	ldi	r24, 0x59	; 89
+ 5fc:	90 e0       	ldi	r25, 0x00	; 0
+ 5fe:	29 e5       	ldi	r18, 0x59	; 89
+ 600:	30 e0       	ldi	r19, 0x00	; 0
+ 602:	f9 01       	movw	r30, r18
+ 604:	20 81       	ld	r18, Z
+ 606:	2f 7b       	andi	r18, 0xBF	; 191
+ 608:	fc 01       	movw	r30, r24
+ 60a:	20 83       	st	Z, r18
+	TIFR &= ~_BV(TOV2);
+ 60c:	88 e5       	ldi	r24, 0x58	; 88
+ 60e:	90 e0       	ldi	r25, 0x00	; 0
+ 610:	28 e5       	ldi	r18, 0x58	; 88
+ 612:	30 e0       	ldi	r19, 0x00	; 0
+ 614:	f9 01       	movw	r30, r18
+ 616:	20 81       	ld	r18, Z
+ 618:	2f 7b       	andi	r18, 0xBF	; 191
+ 61a:	fc 01       	movw	r30, r24
+ 61c:	20 83       	st	Z, r18
+	
+	if( gServos[gActiveServoIndex1].pulse_slot_count == 0 ){
+ 61e:	80 91 61 00 	lds	r24, 0x0061
+ 622:	28 2f       	mov	r18, r24
+ 624:	33 27       	eor	r19, r19
+ 626:	27 fd       	sbrc	r18, 7
+ 628:	30 95       	com	r19
+ 62a:	c9 01       	movw	r24, r18
+ 62c:	88 0f       	add	r24, r24
+ 62e:	99 1f       	adc	r25, r25
+ 630:	82 0f       	add	r24, r18
+ 632:	93 1f       	adc	r25, r19
+ 634:	9c 01       	movw	r18, r24
+ 636:	22 0f       	add	r18, r18
+ 638:	33 1f       	adc	r19, r19
+ 63a:	22 0f       	add	r18, r18
+ 63c:	33 1f       	adc	r19, r19
+ 63e:	82 0f       	add	r24, r18
+ 640:	93 1f       	adc	r25, r19
+ 642:	81 56       	subi	r24, 0x61	; 97
+ 644:	9f 4f       	sbci	r25, 0xFF	; 255
+ 646:	fc 01       	movw	r30, r24
+ 648:	80 81       	ld	r24, Z
+ 64a:	91 81       	ldd	r25, Z+1	; 0x01
+ 64c:	00 97       	sbiw	r24, 0x00	; 0
+ 64e:	51 f5       	brne	.+84     	; 0x6a4 <__vector_4+0xce>
+        // set low pulse
+	    *(gServoPorts[gActiveServoIndex1]) &= ~_BV(gServoPins[gActiveServoIndex1]);	
+ 650:	80 91 61 00 	lds	r24, 0x0061
+ 654:	99 27       	eor	r25, r25
+ 656:	87 fd       	sbrc	r24, 7
+ 658:	90 95       	com	r25
+ 65a:	88 0f       	add	r24, r24
+ 65c:	99 1f       	adc	r25, r25
+ 65e:	8e 58       	subi	r24, 0x8E	; 142
+ 660:	9f 4f       	sbci	r25, 0xFF	; 255
+ 662:	fc 01       	movw	r30, r24
+ 664:	80 81       	ld	r24, Z
+ 666:	91 81       	ldd	r25, Z+1	; 0x01
+ 668:	fc 01       	movw	r30, r24
+ 66a:	20 81       	ld	r18, Z
+ 66c:	62 2f       	mov	r22, r18
+ 66e:	20 91 61 00 	lds	r18, 0x0061
+ 672:	33 27       	eor	r19, r19
+ 674:	27 fd       	sbrc	r18, 7
+ 676:	30 95       	com	r19
+ 678:	2e 59       	subi	r18, 0x9E	; 158
+ 67a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 67c:	f9 01       	movw	r30, r18
+ 67e:	20 81       	ld	r18, Z
+ 680:	42 2f       	mov	r20, r18
+ 682:	50 e0       	ldi	r21, 0x00	; 0
+ 684:	21 e0       	ldi	r18, 0x01	; 1
+ 686:	30 e0       	ldi	r19, 0x00	; 0
+ 688:	04 2e       	mov	r0, r20
+ 68a:	02 c0       	rjmp	.+4      	; 0x690 <__vector_4+0xba>
+ 68c:	22 0f       	add	r18, r18
+ 68e:	33 1f       	adc	r19, r19
+ 690:	0a 94       	dec	r0
+ 692:	e2 f7       	brpl	.-8      	; 0x68c <__vector_4+0xb6>
+ 694:	20 95       	com	r18
+ 696:	26 23       	and	r18, r22
+ 698:	fc 01       	movw	r30, r24
+ 69a:	20 83       	st	Z, r18
+        gActiveServoIndex1 = -1; // timer 2 idle status		
+ 69c:	8f ef       	ldi	r24, 0xFF	; 255
+ 69e:	80 93 61 00 	sts	0x0061, r24
+ 6a2:	39 c0       	rjmp	.+114    	; 0x716 <__vector_4+0x140>
+        
+        //DEBUG_PULSE_LOW();	
+	}
+	else{
+        TCNT2 = PULSE_SLOT_RELOAD_COUNT; // must be first
+ 6a4:	84 e4       	ldi	r24, 0x44	; 68
+ 6a6:	90 e0       	ldi	r25, 0x00	; 0
+ 6a8:	2e e8       	ldi	r18, 0x8E	; 142
+ 6aa:	fc 01       	movw	r30, r24
+ 6ac:	20 83       	st	Z, r18
+        TIMSK |= _BV(TOIE2);
+ 6ae:	89 e5       	ldi	r24, 0x59	; 89
+ 6b0:	90 e0       	ldi	r25, 0x00	; 0
+ 6b2:	29 e5       	ldi	r18, 0x59	; 89
+ 6b4:	30 e0       	ldi	r19, 0x00	; 0
+ 6b6:	f9 01       	movw	r30, r18
+ 6b8:	20 81       	ld	r18, Z
+ 6ba:	20 64       	ori	r18, 0x40	; 64
+ 6bc:	fc 01       	movw	r30, r24
+ 6be:	20 83       	st	Z, r18
+        gServos[gActiveServoIndex1].pulse_slot_count --;		
+ 6c0:	80 91 61 00 	lds	r24, 0x0061
+ 6c4:	28 2f       	mov	r18, r24
+ 6c6:	33 27       	eor	r19, r19
+ 6c8:	27 fd       	sbrc	r18, 7
+ 6ca:	30 95       	com	r19
+ 6cc:	c9 01       	movw	r24, r18
+ 6ce:	88 0f       	add	r24, r24
+ 6d0:	99 1f       	adc	r25, r25
+ 6d2:	82 0f       	add	r24, r18
+ 6d4:	93 1f       	adc	r25, r19
+ 6d6:	ac 01       	movw	r20, r24
+ 6d8:	44 0f       	add	r20, r20
+ 6da:	55 1f       	adc	r21, r21
+ 6dc:	44 0f       	add	r20, r20
+ 6de:	55 1f       	adc	r21, r21
+ 6e0:	84 0f       	add	r24, r20
+ 6e2:	95 1f       	adc	r25, r21
+ 6e4:	81 56       	subi	r24, 0x61	; 97
+ 6e6:	9f 4f       	sbci	r25, 0xFF	; 255
+ 6e8:	fc 01       	movw	r30, r24
+ 6ea:	80 81       	ld	r24, Z
+ 6ec:	91 81       	ldd	r25, Z+1	; 0x01
+ 6ee:	ac 01       	movw	r20, r24
+ 6f0:	41 50       	subi	r20, 0x01	; 1
+ 6f2:	50 40       	sbci	r21, 0x00	; 0
+ 6f4:	c9 01       	movw	r24, r18
+ 6f6:	88 0f       	add	r24, r24
+ 6f8:	99 1f       	adc	r25, r25
+ 6fa:	82 0f       	add	r24, r18
+ 6fc:	93 1f       	adc	r25, r19
+ 6fe:	9c 01       	movw	r18, r24
+ 700:	22 0f       	add	r18, r18
+ 702:	33 1f       	adc	r19, r19
+ 704:	22 0f       	add	r18, r18
+ 706:	33 1f       	adc	r19, r19
+ 708:	82 0f       	add	r24, r18
+ 70a:	93 1f       	adc	r25, r19
+ 70c:	81 56       	subi	r24, 0x61	; 97
+ 70e:	9f 4f       	sbci	r25, 0xFF	; 255
+ 710:	fc 01       	movw	r30, r24
+ 712:	51 83       	std	Z+1, r21	; 0x01
+ 714:	40 83       	st	Z, r20
+	}       						
+}
+ 716:	cf 91       	pop	r28
+ 718:	df 91       	pop	r29
+ 71a:	ff 91       	pop	r31
+ 71c:	ef 91       	pop	r30
+ 71e:	9f 91       	pop	r25
+ 720:	8f 91       	pop	r24
+ 722:	6f 91       	pop	r22
+ 724:	5f 91       	pop	r21
+ 726:	4f 91       	pop	r20
+ 728:	3f 91       	pop	r19
+ 72a:	2f 91       	pop	r18
+ 72c:	0f 90       	pop	r0
+ 72e:	0f be       	out	0x3f, r0	; 63
+ 730:	0f 90       	pop	r0
+ 732:	1f 90       	pop	r1
+ 734:	18 95       	reti
+
+00000736 <main>:
+
+int main(void)
+{
+ 736:	df 93       	push	r29
+ 738:	cf 93       	push	r28
+ 73a:	00 d0       	rcall	.+0      	; 0x73c <main+0x6>
+ 73c:	cd b7       	in	r28, 0x3d	; 61
+ 73e:	de b7       	in	r29, 0x3e	; 62
+    cli();	
+ 740:	f8 94       	cli
+	
+    // OUTPUT
+
+    DDRC |= _BV(SERVO_PIN0) | _BV(SERVO_PIN1) | _BV(SERVO_PIN2) | _BV(SERVO_PIN3) | _BV(SERVO_PIN4) | _BV(SERVO_PIN5);
+ 742:	84 e3       	ldi	r24, 0x34	; 52
+ 744:	90 e0       	ldi	r25, 0x00	; 0
+ 746:	24 e3       	ldi	r18, 0x34	; 52
+ 748:	30 e0       	ldi	r19, 0x00	; 0
+ 74a:	f9 01       	movw	r30, r18
+ 74c:	20 81       	ld	r18, Z
+ 74e:	2f 63       	ori	r18, 0x3F	; 63
+ 750:	fc 01       	movw	r30, r24
+ 752:	20 83       	st	Z, r18
+    DDRD |= _BV(SERVO_PIN12) | _BV(SERVO_PIN13) | _BV(SERVO_PIN14) | _BV(SERVO_PIN15);
+ 754:	81 e3       	ldi	r24, 0x31	; 49
+ 756:	90 e0       	ldi	r25, 0x00	; 0
+ 758:	21 e3       	ldi	r18, 0x31	; 49
+ 75a:	30 e0       	ldi	r19, 0x00	; 0
+ 75c:	f9 01       	movw	r30, r18
+ 75e:	20 81       	ld	r18, Z
+ 760:	20 6f       	ori	r18, 0xF0	; 240
+ 762:	fc 01       	movw	r30, r24
+ 764:	20 83       	st	Z, r18
+    DDRB |= _BV(SERVO_PIN6) | _BV(SERVO_PIN7) | _BV(SERVO_PIN8) | _BV(SERVO_PIN9) | _BV(SERVO_PIN10) | _BV(SERVO_PIN11);
+ 766:	87 e3       	ldi	r24, 0x37	; 55
+ 768:	90 e0       	ldi	r25, 0x00	; 0
+ 76a:	27 e3       	ldi	r18, 0x37	; 55
+ 76c:	30 e0       	ldi	r19, 0x00	; 0
+ 76e:	f9 01       	movw	r30, r18
+ 770:	20 81       	ld	r18, Z
+ 772:	2f 63       	ori	r18, 0x3F	; 63
+ 774:	fc 01       	movw	r30, r24
+ 776:	20 83       	st	Z, r18
+    
+    DDRD |= _BV(PD0);
+ 778:	81 e3       	ldi	r24, 0x31	; 49
+ 77a:	90 e0       	ldi	r25, 0x00	; 0
+ 77c:	21 e3       	ldi	r18, 0x31	; 49
+ 77e:	30 e0       	ldi	r19, 0x00	; 0
+ 780:	f9 01       	movw	r30, r18
+ 782:	20 81       	ld	r18, Z
+ 784:	21 60       	ori	r18, 0x01	; 1
+ 786:	fc 01       	movw	r30, r24
+ 788:	20 83       	st	Z, r18
+
+    for( int i=0; i<PIN_COUNT; ++i ){
+ 78a:	1a 82       	std	Y+2, r1	; 0x02
+ 78c:	19 82       	std	Y+1, r1	; 0x01
+ 78e:	2d c0       	rjmp	.+90     	; 0x7ea <main+0xb4>
+        gServos[i].enabled = 1;
+ 790:	29 81       	ldd	r18, Y+1	; 0x01
+ 792:	3a 81       	ldd	r19, Y+2	; 0x02
+ 794:	c9 01       	movw	r24, r18
+ 796:	88 0f       	add	r24, r24
+ 798:	99 1f       	adc	r25, r25
+ 79a:	82 0f       	add	r24, r18
+ 79c:	93 1f       	adc	r25, r19
+ 79e:	9c 01       	movw	r18, r24
+ 7a0:	22 0f       	add	r18, r18
+ 7a2:	33 1f       	adc	r19, r19
+ 7a4:	22 0f       	add	r18, r18
+ 7a6:	33 1f       	adc	r19, r19
+ 7a8:	82 0f       	add	r24, r18
+ 7aa:	93 1f       	adc	r25, r19
+ 7ac:	8b 56       	subi	r24, 0x6B	; 107
+ 7ae:	9f 4f       	sbci	r25, 0xFF	; 255
+ 7b0:	21 e0       	ldi	r18, 0x01	; 1
+ 7b2:	fc 01       	movw	r30, r24
+ 7b4:	20 83       	st	Z, r18
+        gServos[i].end_pulse = 500;
+ 7b6:	29 81       	ldd	r18, Y+1	; 0x01
+ 7b8:	3a 81       	ldd	r19, Y+2	; 0x02
+ 7ba:	c9 01       	movw	r24, r18
+ 7bc:	88 0f       	add	r24, r24
+ 7be:	99 1f       	adc	r25, r25
+ 7c0:	82 0f       	add	r24, r18
+ 7c2:	93 1f       	adc	r25, r19
+ 7c4:	9c 01       	movw	r18, r24
+ 7c6:	22 0f       	add	r18, r18
+ 7c8:	33 1f       	adc	r19, r19
+ 7ca:	22 0f       	add	r18, r18
+ 7cc:	33 1f       	adc	r19, r19
+ 7ce:	82 0f       	add	r24, r18
+ 7d0:	93 1f       	adc	r25, r19
+ 7d2:	87 56       	subi	r24, 0x67	; 103
+ 7d4:	9f 4f       	sbci	r25, 0xFF	; 255
+ 7d6:	24 ef       	ldi	r18, 0xF4	; 244
+ 7d8:	31 e0       	ldi	r19, 0x01	; 1
+ 7da:	fc 01       	movw	r30, r24
+ 7dc:	31 83       	std	Z+1, r19	; 0x01
+ 7de:	20 83       	st	Z, r18
+    DDRD |= _BV(SERVO_PIN12) | _BV(SERVO_PIN13) | _BV(SERVO_PIN14) | _BV(SERVO_PIN15);
+    DDRB |= _BV(SERVO_PIN6) | _BV(SERVO_PIN7) | _BV(SERVO_PIN8) | _BV(SERVO_PIN9) | _BV(SERVO_PIN10) | _BV(SERVO_PIN11);
+    
+    DDRD |= _BV(PD0);
+
+    for( int i=0; i<PIN_COUNT; ++i ){
+ 7e0:	89 81       	ldd	r24, Y+1	; 0x01
+ 7e2:	9a 81       	ldd	r25, Y+2	; 0x02
+ 7e4:	01 96       	adiw	r24, 0x01	; 1
+ 7e6:	9a 83       	std	Y+2, r25	; 0x02
+ 7e8:	89 83       	std	Y+1, r24	; 0x01
+ 7ea:	89 81       	ldd	r24, Y+1	; 0x01
+ 7ec:	9a 81       	ldd	r25, Y+2	; 0x02
+ 7ee:	80 31       	cpi	r24, 0x10	; 16
+ 7f0:	91 05       	cpc	r25, r1
+ 7f2:	74 f2       	brlt	.-100    	; 0x790 <main+0x5a>
+        gServos[i].end_pulse = 500;
+    }
+    	
+    // main clock T=250us
+    // TIMER0 clk_io/8
+    TCCR0 = _BV(CS01);
+ 7f4:	83 e5       	ldi	r24, 0x53	; 83
+ 7f6:	90 e0       	ldi	r25, 0x00	; 0
+ 7f8:	22 e0       	ldi	r18, 0x02	; 2
+ 7fa:	fc 01       	movw	r30, r24
+ 7fc:	20 83       	st	Z, r18
+
+    // long clock T>1500us
+    // TIMER1, clk_io/8
+    TCCR1B |= _BV(CS11);
+ 7fe:	8e e4       	ldi	r24, 0x4E	; 78
+ 800:	90 e0       	ldi	r25, 0x00	; 0
+ 802:	2e e4       	ldi	r18, 0x4E	; 78
+ 804:	30 e0       	ldi	r19, 0x00	; 0
+ 806:	f9 01       	movw	r30, r18
+ 808:	20 81       	ld	r18, Z
+ 80a:	22 60       	ori	r18, 0x02	; 2
+ 80c:	fc 01       	movw	r30, r24
+ 80e:	20 83       	st	Z, r18
+    TIMSK |= _BV(TOIE1);
+ 810:	89 e5       	ldi	r24, 0x59	; 89
+ 812:	90 e0       	ldi	r25, 0x00	; 0
+ 814:	29 e5       	ldi	r18, 0x59	; 89
+ 816:	30 e0       	ldi	r19, 0x00	; 0
+ 818:	f9 01       	movw	r30, r18
+ 81a:	20 81       	ld	r18, Z
+ 81c:	24 60       	ori	r18, 0x04	; 4
+ 81e:	fc 01       	movw	r30, r24
+ 820:	20 83       	st	Z, r18
+    TCNT1 = MAIN_SLOT_RELOAD_COUNTER;
+ 822:	8c e4       	ldi	r24, 0x4C	; 76
+ 824:	90 e0       	ldi	r25, 0x00	; 0
+ 826:	2d e1       	ldi	r18, 0x1D	; 29
+ 828:	3b ef       	ldi	r19, 0xFB	; 251
+ 82a:	fc 01       	movw	r30, r24
+ 82c:	31 83       	std	Z+1, r19	; 0x01
+ 82e:	20 83       	st	Z, r18
+	
+    // short clock T>=500us and T<=1500us
+    // TIMER2, clk_io/8
+    TCCR2 |= _BV(CS21);	
+ 830:	85 e4       	ldi	r24, 0x45	; 69
+ 832:	90 e0       	ldi	r25, 0x00	; 0
+ 834:	25 e4       	ldi	r18, 0x45	; 69
+ 836:	30 e0       	ldi	r19, 0x00	; 0
+ 838:	f9 01       	movw	r30, r18
+ 83a:	20 81       	ld	r18, Z
+ 83c:	22 60       	ori	r18, 0x02	; 2
+ 83e:	fc 01       	movw	r30, r24
+ 840:	20 83       	st	Z, r18
+		
+    sei();
+ 842:	78 94       	sei
+	
+    while(1)
+    {		
+    }
+ 844:	ff cf       	rjmp	.-2      	; 0x844 <main+0x10e>
+
+00000846 <__udivmodhi4>:
+ 846:	aa 1b       	sub	r26, r26
+ 848:	bb 1b       	sub	r27, r27
+ 84a:	51 e1       	ldi	r21, 0x11	; 17
+ 84c:	07 c0       	rjmp	.+14     	; 0x85c <__udivmodhi4_ep>
+
+0000084e <__udivmodhi4_loop>:
+ 84e:	aa 1f       	adc	r26, r26
+ 850:	bb 1f       	adc	r27, r27
+ 852:	a6 17       	cp	r26, r22
+ 854:	b7 07       	cpc	r27, r23
+ 856:	10 f0       	brcs	.+4      	; 0x85c <__udivmodhi4_ep>
+ 858:	a6 1b       	sub	r26, r22
+ 85a:	b7 0b       	sbc	r27, r23
+
+0000085c <__udivmodhi4_ep>:
+ 85c:	88 1f       	adc	r24, r24
+ 85e:	99 1f       	adc	r25, r25
+ 860:	5a 95       	dec	r21
+ 862:	a9 f7       	brne	.-22     	; 0x84e <__udivmodhi4_loop>
+ 864:	80 95       	com	r24
+ 866:	90 95       	com	r25
+ 868:	bc 01       	movw	r22, r24
+ 86a:	cd 01       	movw	r24, r26
+ 86c:	08 95       	ret
+
+0000086e <_exit>:
+ 86e:	f8 94       	cli
+
+00000870 <__stop_program>:
+ 870:	ff cf       	rjmp	.-2      	; 0x870 <__stop_program>
